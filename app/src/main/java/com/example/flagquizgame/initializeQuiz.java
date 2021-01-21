@@ -9,26 +9,40 @@ import android.content.res.AssetManager;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 import android.content.res.AssetManager;
 
 public class initializeQuiz {
-    private List<String> countries;
+    private List<String> countries; //stores country names
+    private List<String> cCodes; //stores country 2 digit ISO 3166 codes (exception for countries relating to uk which have "gb-" prefixed at start)
+    private HashMap<String, String> cNameToCode; //to be used to store country names and iso codes as key pair values
+    private HashMap<Integer, String> indexForComplete; //may be potentially used to keep track of flags already asked in a quiz session? leave for later
+    private Integer totalFlags = 0; //use to index and keep track of number elements stored
+    //may end up moving some of variables above to be parameters of constructor below in order to have data stored in mainActivity or elsewhere that might be more appropriate
 
     public initializeQuiz(Context context){
         System.out.println("initializing quiz...");
         countries = new ArrayList<String>();
+        cCodes = new ArrayList<String>();
+        cNameToCode = new HashMap<String, String>();
 
         try {
             AssetManager assetManager = context.getAssets();
-            Scanner input = new Scanner(assetManager.open("countries.txt"));
+            Scanner cInput = new Scanner(assetManager.open("countries.txt"));
+            Scanner codeInput = new Scanner(assetManager.open("country codes.txt"));
 
-            while (input.hasNextLine()) {
-                String country = input.nextLine();
+            while (cInput.hasNextLine()) { //since lists are same length, checking that only one of them still has content for now. can be improved later on.
+                String country = cInput.nextLine();
+                String code = codeInput.nextLine();
                 countries.add(country);
+                cCodes.add(code);
+                cNameToCode.put(country,code);
+                totalFlags++;
             }
-            input.close();
+            cInput.close();
+            codeInput.close();
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -36,7 +50,7 @@ public class initializeQuiz {
 
         if(!countries.isEmpty()) {
             for (int i = 0; i < countries.size(); i++) {
-                System.out.println(countries.get(i));
+                System.out.println(countries.get(i) + " " + cCodes.get(i));
             }
         }else{
             System.out.println("list currently empty.");
