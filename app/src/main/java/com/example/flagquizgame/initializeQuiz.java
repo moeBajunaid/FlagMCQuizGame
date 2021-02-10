@@ -21,6 +21,7 @@ public class initializeQuiz {
     private HashMap<Integer, String> indexForComplete; //may be potentially used to keep track of flags already asked in a quiz session? leave for later
     private Integer totalFlags = 0; //use to index and keep track of number elements stored
     //may end up moving some of variables above to be parameters of constructor below in order to have data stored in mainActivity or elsewhere that might be more appropriate
+    //was used to working in c, forgot that java has setters and getters for that!
 
     public initializeQuiz(Context context){
         System.out.println("initializing quiz...");
@@ -56,4 +57,50 @@ public class initializeQuiz {
             System.out.println("list currently empty.");
         }
     }
+
+    //getters
+    public List<String> getCountries() {
+        return countries;
+    }
+
+    public List<String> getcCodes() {
+        return cCodes;
+    }
+
+    public HashMap<String, String> getcNameToCode() {
+        return cNameToCode;
+    }
+
+    public HashMap<Integer, String> getIndexForComplete() {
+        return indexForComplete;
+    }
+
+    public Integer getTotalFlags() {
+        return totalFlags;
+    }
+
+
+
+    //setters
+
+    public void setCountries(List<String> countries) {
+        this.countries = countries;
+    }
+
+    public void setcNameToCode(HashMap<String, String> cNameToCode) {
+        this.cNameToCode = cNameToCode;
+    }
+
+    public void setcCodes(List<String> cCodes) {
+        this.cCodes = cCodes;
+    }
+
+    public void setIndexForComplete(HashMap<Integer, String> indexForComplete) {
+        this.indexForComplete = indexForComplete;
+    }
+
+    public void setTotalFlags(Integer totalFlags) {
+        this.totalFlags = totalFlags;
+    }
+
 }
