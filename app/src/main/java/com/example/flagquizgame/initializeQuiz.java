@@ -18,6 +18,7 @@ public class initializeQuiz {
     private List<String> countries; //stores country names
     private List<String> cCodes; //stores country 2 digit ISO 3166 codes (exception for countries relating to uk which have "gb-" prefixed at start)
     private HashMap<String, String> cNameToCode; //to be used to store country names and iso codes as key pair values
+    private HashMap<String, String> codeToCname; //to be used to store country names and iso codes as key pair values the opposite way
     private HashMap<Integer, String> indexForComplete; //may be potentially used to keep track of flags already asked in a quiz session? leave for later
     private Integer totalFlags = 0; //use to index and keep track of number elements stored
     //may end up moving some of variables above to be parameters of constructor below in order to have data stored in mainActivity or elsewhere that might be more appropriate
@@ -28,6 +29,7 @@ public class initializeQuiz {
         countries = new ArrayList<String>();
         cCodes = new ArrayList<String>();
         cNameToCode = new HashMap<String, String>();
+        codeToCname = new HashMap<String,String>();
 
         try {
             AssetManager assetManager = context.getAssets();
@@ -40,6 +42,7 @@ public class initializeQuiz {
                 countries.add(country);
                 cCodes.add(code);
                 cNameToCode.put(country,code);
+                codeToCname.put(code,country);
                 totalFlags++;
             }
             cInput.close();
@@ -75,6 +78,10 @@ public class initializeQuiz {
         return indexForComplete;
     }
 
+    public HashMap<String, String> getCodeToCname() {
+        return codeToCname;
+    }
+
     public Integer getTotalFlags() {
         return totalFlags;
     }
@@ -103,4 +110,7 @@ public class initializeQuiz {
         this.totalFlags = totalFlags;
     }
 
+    public void setCodeToCname(HashMap<String, String> codeToCname) {
+        this.codeToCname = codeToCname;
+    }
 }

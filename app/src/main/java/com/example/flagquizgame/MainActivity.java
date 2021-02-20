@@ -18,13 +18,12 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 public class MainActivity extends AppCompatActivity {
-    private initializeQuiz startQuiz;
+
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        startQuiz = new initializeQuiz(cContext.getContext());
         super.onCreate(savedInstanceState);
 
 
