@@ -30,6 +30,7 @@ public class initializeQuiz {
         cCodes = new ArrayList<String>();
         cNameToCode = new HashMap<String, String>();
         codeToCname = new HashMap<String,String>();
+        indexForComplete = new HashMap<Integer, String>();
 
         try {
             AssetManager assetManager = context.getAssets();

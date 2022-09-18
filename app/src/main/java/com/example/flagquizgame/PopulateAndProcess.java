@@ -17,13 +17,15 @@ public class PopulateAndProcess {
 
     private Random generator;
 
-    private List<String> countries = startQuiz.getCountries();
-    private HashMap<Integer, String> alreadyUsedIndex = startQuiz.getIndexForComplete();
+    private List<String> countries;
+    private HashMap<Integer, String> alreadyUsedIndex;
 
     PopulateAndProcess(FirebaseStorage imgStorage){
-        firebaseStorageStorage = imgStorage; //may be able to leave step of concatinating url of image location to class above and just have index of it set from here
+        firebaseStorageStorage = imgStorage; //may be able to leave step of concatenating url of image location to class above and just have index of it set from here
         startQuiz = new initializeQuiz(cContext.getContext());
         generator = new Random();
+        countries = startQuiz.getCountries();
+        alreadyUsedIndex = startQuiz.getIndexForComplete();
     }
 
     public void populateAnswerIndex(){
@@ -36,7 +38,7 @@ public class PopulateAndProcess {
 
         while(answerIndexUnselected){
             randomIndex = generator.nextInt(countries.size());
-            if(!alreadyUsedIndex.containsKey(randomIndex)){
+            if(alreadyUsedIndex.isEmpty() || !alreadyUsedIndex.containsKey(randomIndex)){
                 answerIndexUnselected = false;
             }
         }
@@ -65,6 +67,25 @@ public class PopulateAndProcess {
     }
 
 
+    public int[] randomizeChoicePlacementInButtons(){
+        int[] buttonsOrder = new int[4];
+        int completed = 0;
+        int currentIndex = 0;
+        int num;
+        HashMap<Integer,Integer> used = new HashMap<Integer, Integer>();
+
+        while(completed != 4){
+            num = generator.nextInt(4) + 1;
+            if(!used.containsKey(num)){
+                buttonsOrder[currentIndex] = num;
+                used.put(num,0);
+                completed++;
+                currentIndex++;
+            }
+        }
+
+        return buttonsOrder;
+    }
 
    //getters
     public int getAnswerIndex() {

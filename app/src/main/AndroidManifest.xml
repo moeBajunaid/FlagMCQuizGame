@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.flagquizgame">
 
-
     <application
         android:name=".cContext"
         android:allowBackup="true"
@@ -11,11 +10,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FlagQuizGame">
+        <activity android:name=".Game_Over"></activity>
         <activity
             android:name=".qzSession"
             android:label="@string/title_activity_qz_session"
-            android:theme="@style/Theme.FlagQuizGame.NoActionBar"></activity>
-        <!-- added android:name above to allow for obtaining context from anywhere to function properly (was needed in initializeQuiz constructor) -->
+            android:theme="@style/Theme.FlagQuizGame.NoActionBar" /> <!-- added android:name above to allow for obtaining context from anywhere to function properly (was needed in initializeQuiz constructor) -->
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
