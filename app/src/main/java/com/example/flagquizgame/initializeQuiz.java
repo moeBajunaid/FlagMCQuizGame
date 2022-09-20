@@ -19,10 +19,9 @@ public class initializeQuiz {
     private List<String> cCodes; //stores country 2 digit ISO 3166 codes (exception for countries relating to uk which have "gb-" prefixed at start)
     private HashMap<String, String> cNameToCode; //to be used to store country names and iso codes as key pair values
     private HashMap<String, String> codeToCname; //to be used to store country names and iso codes as key pair values the opposite way
-    private HashMap<Integer, String> indexForComplete; //may be potentially used to keep track of flags already asked in a quiz session? leave for later
+    private HashMap<Integer, String> indexForComplete; //used to keep track of flags already asked in a quiz session
     private Integer totalFlags = 0; //use to index and keep track of number elements stored
-    //may end up moving some of variables above to be parameters of constructor below in order to have data stored in mainActivity or elsewhere that might be more appropriate
-    //was used to working in c, forgot that java has setters and getters for that!
+
 
     public initializeQuiz(Context context){
         System.out.println("initializing quiz...");
@@ -53,7 +52,7 @@ public class initializeQuiz {
             ex.printStackTrace();
         }
 
-        if(!countries.isEmpty()) {
+        if(!countries.isEmpty()) { //for debugging purposes, print to console the content line by line of each file.
             for (int i = 0; i < countries.size(); i++) {
                 System.out.println(countries.get(i) + " " + cCodes.get(i));
             }

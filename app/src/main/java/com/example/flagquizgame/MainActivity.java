@@ -1,5 +1,5 @@
 /**
- * need to recall how activities work within the context of android.
+ * main activity that user interacts with when after they launch the app.
  */
 package com.example.flagquizgame;
 
@@ -23,8 +23,7 @@ import com.google.firebase.storage.StorageReference;
 
 public class MainActivity extends AppCompatActivity {
 
-    // public Integer userInputNumQ;
-    public Button start;
+    public Button start; // button used to allow user to start the quiz.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,60 +31,35 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
         start = (Button)findViewById(R.id.button_first);
-        start.setOnClickListener(new View.OnClickListener(){
+        start.setOnClickListener(new View.OnClickListener(){ // onclick listener for when user clicks on start button
             public void onClick(View v){
                 loadQuiz(v);
             }
         });
 
-        /*
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .setReorderingAllowed(true)
-                    .add(R.id.fragment_container_view, FirstFragment.class, null)
-                    .commit();
-
-        }
-        */
-
-
-
-
-        System.out.println("where does this print to??");
+        System.out.println("mainActivity onCreate method called..");
     }
 
 
-    public void loadQuiz (View view){ //loads up quiz after user selects start buttton. Currently immediately starts quiz, but may later change this to allow user to select number of questions
-         //BELOW DOES NOT WORK ... CANNOT PASS ON INTENT FROM ACTIVITY TO A FRAGMENT....
+    public void loadQuiz (View view){ //loads up quiz after user selects start button.
+
 
         EditText userInputNumQuestions = (EditText) findViewById(R.id.numOfQuestionsUI);
 
         if(!userInputNumQuestions.getText().toString().isEmpty()) { //double check that user has entered a value, and did not leave field empty
-            Integer userInputNumQ = Integer.valueOf(userInputNumQuestions.getText().toString()); //should be converting number from string to integer
+            Integer userInputNumQ = Integer.valueOf(userInputNumQuestions.getText().toString()); // converting number entered by user from string to integer
 
 
-            if (userInputNumQ >= 1 && userInputNumQ <= 254) {
+            if (userInputNumQ >= 1 && userInputNumQ <= 254) { //confirm that user entered a valid number of questions to do and start the quiz if they did.
                 Intent beginQuiz = new Intent(this, qzSession.class);
                 beginQuiz.putExtra("numOfQuestions", userInputNumQ);
                 startActivity(beginQuiz);
-            } else { //add in toast notification here to let user know to input a valid number of questions
+            } else { //otherwise let user know to input a valid number of questions
                 Toast toast2 = Toast.makeText(cContext.getContext(), "Please Enter a valid number between 1 and 254", Toast.LENGTH_SHORT);
                 toast2.show();
             }
         }
-        /*
 
-        //FROM previous implementation attempting to use fragments: NavHostFragment.findNavController(FirstFragment.this)
-        //                    .navigate(R.id.action_FirstFragment_to_SecondFragment);
-
-
-
-        Intent enterQuizLength = new Intent(this,FirstFragment.class);
-        startActivity(enterQuizLength);
-
-         will be moving this over somewhere else, most likely make it launch from first fragment
-
-        */
     }
 
 

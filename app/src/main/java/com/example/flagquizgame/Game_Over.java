@@ -13,7 +13,7 @@ public class Game_Over extends AppCompatActivity {
     public TextView result;
     public Button playAgain;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) { //display game over screen with user score and let them play again if they want.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game__over);
         result = (TextView)findViewById(R.id.displayUserScore);

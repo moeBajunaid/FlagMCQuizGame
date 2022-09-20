@@ -11,7 +11,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.InputStream;
 
-// needed for retrieving images using glide
+// needed for retrieving images from firebase using glide
 @GlideModule
 public class MyAppGlideModule extends AppGlideModule {
     @Override

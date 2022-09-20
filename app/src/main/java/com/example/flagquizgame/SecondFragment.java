@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 public class SecondFragment extends Fragment {
-   //Current idea: make this the final page that displays score... cant make the onclick either go to the leaderboard, or back to the main menu.
+   //final page that displays score
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
@@ -25,7 +25,7 @@ public class SecondFragment extends Fragment {
 
         view.findViewById(R.id.button_second).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view) { //case where user selects to play again, go back to main menu
                 NavHostFragment.findNavController(SecondFragment.this)
                         .navigate(R.id.action_SecondFragment_to_FirstFragment);
             }

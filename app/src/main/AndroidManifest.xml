@@ -15,7 +15,8 @@
             android:name=".qzSession"
             android:label="@string/title_activity_qz_session"
             android:theme="@style/Theme.FlagQuizGame.NoActionBar" /> <!-- added android:name above to allow for obtaining context from anywhere to function properly (was needed in initializeQuiz constructor) -->
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

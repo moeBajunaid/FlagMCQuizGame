@@ -1,3 +1,6 @@
+/**
+ * used for populating the 4 options that the user can select from for each question.
+ */
 package com.example.flagquizgame;
 
 import com.google.firebase.storage.FirebaseStorage;
@@ -11,27 +14,24 @@ public class PopulateAndProcess {
     private FirebaseStorage firebaseStorageStorage;
     private initializeQuiz startQuiz;
 
-    private int answerIndex;
-    private List<Integer> other3Indexes;
+    private int answerIndex; //contains value representing correct answer
+    private List<Integer> other3Indexes; //contains values representing other 3 randomly populated options available for the question
 
 
-    private Random generator;
+    private Random generator; //random number generator to be used to select index of next country to use as a question
 
     private List<String> countries;
     private HashMap<Integer, String> alreadyUsedIndex;
 
     PopulateAndProcess(FirebaseStorage imgStorage){
-        firebaseStorageStorage = imgStorage; //may be able to leave step of concatenating url of image location to class above and just have index of it set from here
+        firebaseStorageStorage = imgStorage;
         startQuiz = new initializeQuiz(cContext.getContext());
         generator = new Random();
         countries = startQuiz.getCountries();
         alreadyUsedIndex = startQuiz.getIndexForComplete();
     }
 
-    public void populateAnswerIndex(){
-        //local variables to be used while getting index of country to use
-        String countryName; //may not end up using it
-        int countryIndex;
+    public void populateAnswerIndex(){ //used to select next question to ask user
         int randomIndex = 0;
         boolean answerIndexUnselected = true;
 
@@ -47,9 +47,8 @@ public class PopulateAndProcess {
     }
 
 
-    public void populateOther3Indexes(){ //have it where this method is called after populateAnswerIndex
+    public void populateOther3Indexes(){ //method is called after populateAnswerIndex
         int randomIndex = 0;
-        //List<String> countries = startQuiz.getCountries();
         other3Indexes = new ArrayList<Integer>();
 
         while (other3Indexes.size() != 3){
@@ -67,7 +66,7 @@ public class PopulateAndProcess {
     }
 
 
-    public int[] randomizeChoicePlacementInButtons(){
+    public int[] randomizeChoicePlacementInButtons(){ //randomize which button options used for each question's options available
         int[] buttonsOrder = new int[4];
         int completed = 0;
         int currentIndex = 0;
